@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import os
+import urllib.request
 
 from sys import argv
 
@@ -8,9 +9,17 @@ ASCII_CHARS = """$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:
 ASCII_CHARS_LENGTH = len(ASCII_CHARS)
 
 def main():
-    path_to_image = argv[1]
-    #path_to_image = input('Enter path to image: ')
-    image = cv2.imread(path_to_image)
+    if len(argv) == 1:
+        path_to_image = input('Enter path to image: ')
+    else:
+        path_to_image = argv[1]
+
+    if not os.path.isfile(path_to_image):
+        req = urllib.request.urlopen(path_to_image)
+        arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+        image = cv2.imdecode(arr, -1)
+    else:
+        image = cv2.imread(path_to_image)
 
     # convert to grayscale
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -28,7 +37,7 @@ def main():
 
     # get terminal sizes:
     height = os.get_terminal_size().lines
-    width = int((height/9) * 16)
+    width = int((height/9) * 16) * 2
 
     print (f"Width: {width}", f"Height: {height}")
 
