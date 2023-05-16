@@ -18,12 +18,17 @@ def main():
     # normalize image
     image = cv2.normalize(image, None, 0, 255, cv2.NORM_MINMAX)
 
+    cv2.imshow('image', image)
+    cv2.waitKey(0)
+
     # rotate image
     image = cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE)
 
+    image = cv2.flip(image, 1)
+
     # get terminal sizes:
     height = os.get_terminal_size().lines
-    width = int((height/9) * 16) * 2
+    width = int((height/9) * 16)
 
     print (f"Width: {width}", f"Height: {height}")
 
@@ -35,9 +40,7 @@ def main():
             pixel = image[c, r]
             char_index = 0
 
-            for index in range(int(255/ASCII_CHARS_LENGTH)):
-                if int(pixel/ASCII_CHARS_LENGTH) > index:
-                    char_index = index
+            char_index = int((pixel/255) * (ASCII_CHARS_LENGTH-1))
             
             print(ASCII_CHARS[char_index], end='')
         print()
