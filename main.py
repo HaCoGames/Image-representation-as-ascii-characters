@@ -36,7 +36,7 @@ def main():
 
     for r in range(height):
         for c in range(width):
-            # get pixel at position (c, r)
+            # get pixel at position (c, r)  
             pixel = image[c, r]
             char_index = 0
 
