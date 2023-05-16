@@ -8,5 +8,6 @@
  Look at the doku on [pypi.org](https://pypi.org/project/pipenv/)
 ### Install needed packages:
  Download the project into a folder. Open a terminal and write <code>pipenv shell</code>.  
+ This should download all the packages needed for this project.  
  Than just type <code>python main.py</code> in the same folder.
  You will be asked to give a path to a directory. The path can be a link to an image or just a normal system path.
