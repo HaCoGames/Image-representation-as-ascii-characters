@@ -5,7 +5,7 @@
  Anyways, here is my implementation made with python and opencv
 ## Get ready to install: 
 ### Install pipenv:
- Look at the doku on [link](https://pypi.org/project/pipenv/ "pypi.org")
+ Look at the doku on [pypi.org](https://pypi.org/project/pipenv/)
 ### Install needed packages:
  Download the project into a folder. Open a terminal and write <code>pipenv shell</code>.  
  Than just type <code>python main.py</code> in the same folder.
