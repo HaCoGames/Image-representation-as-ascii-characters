@@ -14,12 +14,19 @@ def main():
     else:
         path_to_image = argv[1]
 
-    if not os.path.isfile(path_to_image):
-        req = urllib.request.urlopen(path_to_image)
-        arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-        image = cv2.imdecode(arr, -1)
-    else:
-        image = cv2.imread(path_to_image)
+    try:
+        if not os.path.isfile(path_to_image):
+            req = urllib.request.urlopen(path_to_image)
+            arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+            image = cv2.imdecode(arr, -1)
+        else:
+            image = cv2.imread(path_to_image)
+    except urllib.error.URLError as ex:
+        print(f'Could not get Imgae: {ex.reason}\non: {path_to_image}')
+        return
+    except:
+        print(f'Error: image not found on: {path_to_image}')
+        return
 
     # convert to grayscale
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
