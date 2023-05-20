@@ -35,9 +35,15 @@ def main():
 
     image = cv2.flip(image, 1)
 
-    # get terminal sizes:
+    # get normal image size:
+    height_n, width_n = image.shape
+
     height = os.get_terminal_size().lines
-    width = int((height/9) * 16) * 2
+    width = int((height*width_n)/height_n)
+
+    if width > os.get_terminal_size().columns:
+        width = os.get_terminal_size().columns
+        height = int((width*height_n)/width_n)
 
     print (f"Width: {width}", f"Height: {height}")
 
