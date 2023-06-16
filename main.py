@@ -43,7 +43,7 @@ def main():
     image = cv2.flip(image, 1)
 
     # get normal image size:
-    height_n, width_n = image.shape
+    width_n, height_n = image.shape
 
     height = os.get_terminal_size().lines
     width = int((height*width_n)/height_n)
@@ -51,7 +51,10 @@ def main():
     if width > os.get_terminal_size().columns:
         width = os.get_terminal_size().columns
         height = int((width*height_n)/width_n)
+    
+    width *= 1
 
+    print(f"Width: {width_n}", f"Height: {height_n}")
     print (f"Width: {width}", f"Height: {height}")
 
     image = cv2.resize(image, (height, width))
